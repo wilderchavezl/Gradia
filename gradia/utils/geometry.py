@@ -35,3 +35,35 @@ def distance_to_polyline_sq(px: float, py: float, points: list[tuple[float, floa
         cy = y1 + t * (y2 - y1)
         best = min(best, (px - cx) ** 2 + (py - cy) ** 2)
     return best
+
+
+def segment_intersects_rect(x1: float, y1: float, x2: float, y2: float,
+                            rect: tuple[float, float, float, float]) -> bool:
+    min_x, min_y, max_x, max_y = rect
+    dx, dy = x2 - x1, y2 - y1
+    t0, t1 = 0.0, 1.0
+    for p, q in ((-dx, x1 - min_x), (dx, max_x - x1), (-dy, y1 - min_y), (dy, max_y - y1)):
+        if p == 0:
+            if q < 0:
+                return False
+            continue
+        t = q / p
+        if p < 0:
+            t0 = max(t0, t)
+        else:
+            t1 = min(t1, t)
+        if t0 > t1:
+            return False
+    return True
+
+
+def polyline_intersects_rect(points: list[tuple[float, float]], rect: tuple[float, float, float, float],
+                             padding: float) -> bool:
+    if not points:
+        return False
+    min_x, min_y, max_x, max_y = rect
+    padded = (min_x - padding, min_y - padding, max_x + padding, max_y + padding)
+    if len(points) == 1:
+        return segment_intersects_rect(*points[0], *points[0], padded)
+    return any(segment_intersects_rect(x1, y1, x2, y2, padded)
+               for (x1, y1), (x2, y2) in zip(points, points[1:]))

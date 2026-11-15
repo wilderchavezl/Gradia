@@ -23,7 +23,7 @@ from enum import Enum
 import math
 from gradia.backend.logger import Logger
 from gradia.utils.colors import has_visible_color
-from gradia.utils.geometry import distance_to_polyline_sq
+from gradia.utils.geometry import distance_to_polyline_sq, polyline_intersects_rect
 import time
 import unicodedata
 
@@ -142,6 +142,11 @@ class DrawingAction:
         return (min_x - radius <= x_img <= max_x + radius and
                 min_y - radius <= y_img <= max_y + radius)
 
+    def intersects_rect(self, rect: tuple[float, float, float, float]) -> bool:
+        min_x, min_y, max_x, max_y = self.get_bounds().get_bounding_rect()
+        r_min_x, r_min_y, r_max_x, r_max_y = rect
+        return min_x <= r_max_x and r_min_x <= max_x and min_y <= r_max_y and r_min_y <= max_y
+
     def _calculate_shadow_color(self, color):
         r = color.red
         g = color.green
@@ -198,6 +203,9 @@ class StrokeAction(DrawingAction):
     def hit_by_eraser(self, x_img: float, y_img: float, radius: float) -> bool:
         reach = radius + self._half_line_width()
         return distance_to_polyline_sq(x_img, y_img, self.stroke) <= reach * reach
+
+    def intersects_rect(self, rect: tuple[float, float, float, float]) -> bool:
+        return polyline_intersects_rect(self.stroke, rect, self._half_line_width())
 
     def get_bounds(self) -> QuadBounds:
         if self._bounds is None:
@@ -309,6 +317,9 @@ class ArrowAction(DrawingAction):
     def hit_by_eraser(self, x_img: float, y_img: float, radius: float) -> bool:
         reach = radius + self.options.size / 2
         return distance_to_polyline_sq(x_img, y_img, [self.start, self.end]) <= reach * reach
+
+    def intersects_rect(self, rect: tuple[float, float, float, float]) -> bool:
+        return polyline_intersects_rect([self.start, self.end], rect, self.options.size / 2)
 
     def translate(self, dx: int, dy: int):
         self.start = (self.start[0] + dx, self.start[1] + dy)
@@ -821,6 +832,9 @@ class EraseAction(DrawingAction):
         return False
 
     def hit_by_eraser(self, x_img: float, y_img: float, radius: float) -> bool:
+        return False
+
+    def intersects_rect(self, rect: tuple[float, float, float, float]) -> bool:
         return False
 
     def translate(self, dx: int, dy: int):
