@@ -18,6 +18,19 @@ template $GradiaDrawingToolsGroup: Box {
     tool-changed => $on_tool_changed();
   }
 
+  Revealer shapes_revealer {
+    reveal-child: false;
+    transition-type: slide_up;
+    transition-duration: 200;
+    valign: start;
+
+    child: Box shapes_box {
+      spacing: 18;
+      homogeneous: true;
+      margin-top: 9;
+    };
+  }
+
   $GradiaQuickColorPicker color_picker {
     margin-top: 6;
     color-changed => $on_primary_color_changed();

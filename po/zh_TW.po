@@ -887,6 +887,10 @@ msgstr "編號"
 msgid "Eraser"
 msgstr "橡皮擦"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "形狀"
+
 #: gradia/ui/dialog/delete_screenshots_dialog.py:33
 msgid "No screenshots to delete"
 msgstr "沒有可刪除的截圖"

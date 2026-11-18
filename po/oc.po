@@ -370,6 +370,10 @@ msgstr "Nombre"
 msgid "Eraser"
 msgstr "Goma"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "Formas"
+
 #: data/ui/selectors/gradient_selector.blp:5
 msgid "Gradient Background"
 msgstr "Fons degradat"

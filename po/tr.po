@@ -918,6 +918,10 @@ msgstr "Sayı"
 msgid "Eraser"
 msgstr "Silgi"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "Şekiller"
+
 #: gradia/ui/dialog/delete_screenshots_dialog.py:33
 msgid "No screenshots to delete"
 msgstr "Silinecek ekran görüntüsü yok"

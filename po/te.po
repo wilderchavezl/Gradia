@@ -902,6 +902,10 @@ msgstr "సంఖ్య"
 msgid "Eraser"
 msgstr "ఎరేజర్"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "ఆకారాలు"
+
 #: gradia/ui/dialog/delete_screenshots_dialog.py:33
 msgid "No screenshots to delete"
 msgstr "తొలగించడానికి స్క్రీన్‌షాట్‌లు లేవు"

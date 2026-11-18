@@ -67,15 +67,15 @@ class DrawingMode(Enum):
 DrawingMode._shortcuts = {
     DrawingMode.SELECT:       ["0", "KP_0", "grave", "s"],
     DrawingMode.PEN:          ["1", "KP_1", "d", "p"],
-    DrawingMode.TEXT:         ["2", "KP_2", "t"],
-    DrawingMode.LINE:         ["3", "KP_3", "l"],
-    DrawingMode.ARROW:        ["4", "KP_4", "a"],
-    DrawingMode.SQUARE:       ["5", "KP_5", "r"],
-    DrawingMode.CIRCLE:       ["6", "KP_6", "o"],
-    DrawingMode.HIGHLIGHTER:  ["7", "KP_7", "h"],
-    DrawingMode.CENSOR:       ["8", "KP_8", "c"],
-    DrawingMode.NUMBER:       ["9", "KP_9", "n"],
-    DrawingMode.ERASER:       ["e"],
+    DrawingMode.HIGHLIGHTER:  ["2", "KP_2", "h"],
+    DrawingMode.ERASER:       ["3", "KP_3", "e"],
+    DrawingMode.TEXT:         ["4", "KP_4", "t"],
+    DrawingMode.CENSOR:       ["5", "KP_5", "c"],
+    DrawingMode.NUMBER:       ["6", "KP_6", "n"],
+    DrawingMode.SQUARE:       ["r"],
+    DrawingMode.CIRCLE:       ["o"],
+    DrawingMode.LINE:         ["l"],
+    DrawingMode.ARROW:        ["a"],
 }
 
 

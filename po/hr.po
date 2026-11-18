@@ -912,6 +912,10 @@ msgstr "Broj"
 msgid "Eraser"
 msgstr "Gumica"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "Oblici"
+
 #: gradia/ui/dialog/delete_screenshots_dialog.py:33
 msgid "No screenshots to delete"
 msgstr "Nema snimki ekrana za brisanje"

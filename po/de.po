@@ -885,6 +885,10 @@ msgstr "Zahl"
 msgid "Eraser"
 msgstr "Radierer"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "Formen"
+
 #: gradia/ui/dialog/delete_screenshots_dialog.py:33
 msgid "No screenshots to delete"
 msgstr "Keine zu löschenden Bildschirmfotos vorhanden"

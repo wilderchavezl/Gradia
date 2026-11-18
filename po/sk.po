@@ -1399,6 +1399,10 @@ msgstr "Číslo"
 msgid "Eraser"
 msgstr "Guma"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "Tvary"
+
 #: ../gradia/ui/dialog/delete_screenshots_dialog.py:33
 msgid "No screenshots to delete"
 msgstr "Žiadne snímky obrazovky na odstránenie"

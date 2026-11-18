@@ -446,6 +446,10 @@ msgstr "Число"
 msgid "Eraser"
 msgstr "Ластик"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "Фигуры"
+
 #: gradia/ui/preferences_window.py:39 gradia/ui/preferences_window.py:146
 msgid "Root"
 msgstr "Корень"

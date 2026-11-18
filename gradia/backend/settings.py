@@ -34,6 +34,14 @@ class Settings:
     def draw_mode(self, value: str) -> None:
         self._settings.set_string("draw-mode", value)
 
+    @property
+    def shape_mode(self) -> str:
+        return self._settings.get_string("shape-mode")
+
+    @shape_mode.setter
+    def shape_mode(self, value: str) -> None:
+        self._settings.set_string("shape-mode", value)
+
     def get_tool_config_item(self, key: str) -> str | None:
         tool_config = self.get_tool_config()
         return tool_config.get(key)

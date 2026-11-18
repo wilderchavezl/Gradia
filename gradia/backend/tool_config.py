@@ -210,6 +210,8 @@ class ToolOptionsManager:
 
 class ToolConfig:
 
+    SHAPES_GROUP = "shapes"
+
     TEXT_COLORS = [
         (Gdk.RGBA(0.65,0.11,0.18, 1), _("Red")),
         (Gdk.RGBA(0.15,0.64,0.41, 1), _("Green")),
@@ -241,7 +243,7 @@ class ToolConfig:
         match_primary_to_secondary = False,
         primary_color_list = None,
         secondary_color_list = None,
-
+        group: Optional[str] = None,
     ) -> None:
         self.mode = mode
         self.icon = icon
@@ -253,6 +255,7 @@ class ToolConfig:
         self.primary_color_list = primary_color_list
         self.secondary_color_list = secondary_color_list
         self.match_primary_to_secondary = match_primary_to_secondary
+        self.group = group
 
     @staticmethod
     def get_all_tools_positions():
@@ -279,54 +282,10 @@ class ToolConfig:
                 has_primary_color=True,
             ),
             ToolConfig(
-                mode=DrawingMode.TEXT,
-                icon="text-insert2-symbolic",
-                column=2,
-                row=0,
-                shown_stack="text",
-                has_primary_color=True,
-                primary_color_list=ToolConfig.TEXT_COLORS,
-                secondary_color_list=ToolConfig.TEXT_BACKGROUND_COLORS
-            ),
-            ToolConfig(
-                mode=DrawingMode.LINE,
-                icon="draw-line-symbolic",
-                column=3,
-                row=0,
-                has_scale=True,
-                has_primary_color=True,
-            ),
-            ToolConfig(
-                mode=DrawingMode.ARROW,
-                icon="arrow1-top-right-symbolic",
-                column=4,
-                row=0,
-                has_scale=True,
-                has_primary_color=True,
-            ),
-            ToolConfig(
-                mode=DrawingMode.SQUARE,
-                icon="box-small-outline-symbolic",
-                column=0,
-                row=1,
-                shown_stack="fill",
-                has_scale=True,
-                has_primary_color=True,
-            ),
-            ToolConfig(
-                mode=DrawingMode.CIRCLE,
-                icon="circle-outline-thick-symbolic",
-                column=1,
-                row=1,
-                shown_stack="fill",
-                has_scale=True,
-                has_primary_color=True,
-            ),
-            ToolConfig(
                 mode=DrawingMode.HIGHLIGHTER,
                 icon="marker-symbolic",
                 column=2,
-                row=1,
+                row=0,
                 shown_stack="empty",
                 has_scale=True,
                 has_primary_color=True,
@@ -340,9 +299,28 @@ class ToolConfig:
                     ]
             ),
             ToolConfig(
+                mode=DrawingMode.ERASER,
+                icon="eraser4-symbolic",
+                column=3,
+                row=0,
+                shown_stack="empty",
+                has_scale=True,
+                has_primary_color=False,
+            ),
+            ToolConfig(
+                mode=DrawingMode.TEXT,
+                icon="text-insert2-symbolic",
+                column=0,
+                row=1,
+                shown_stack="text",
+                has_primary_color=True,
+                primary_color_list=ToolConfig.TEXT_COLORS,
+                secondary_color_list=ToolConfig.TEXT_BACKGROUND_COLORS
+            ),
+            ToolConfig(
                 mode=DrawingMode.CENSOR,
                 icon="checkerboard-big-symbolic",
-                column=3,
+                column=1,
                 row=1,
                 has_scale=False,
                 has_primary_color=False,
@@ -350,7 +328,7 @@ class ToolConfig:
             ToolConfig(
                 mode=DrawingMode.NUMBER,
                 icon="one-circle-symbolic",
-                column=4,
+                column=2,
                 row=1,
                 shown_stack="fill-border",
                 has_scale=True,
@@ -360,12 +338,75 @@ class ToolConfig:
                 secondary_color_list=ToolConfig.TEXT_BACKGROUND_COLORS
             ),
             ToolConfig(
-                mode=DrawingMode.ERASER,
-                icon="eraser4-symbolic",
+                mode=DrawingMode.SQUARE,
+                icon="box-small-outline-symbolic",
                 column=0,
-                row=2,
-                shown_stack="empty",
+                row=0,
+                group=ToolConfig.SHAPES_GROUP,
+                shown_stack="fill",
                 has_scale=True,
-                has_primary_color=False,
+                has_primary_color=True,
+            ),
+            ToolConfig(
+                mode=DrawingMode.CIRCLE,
+                icon="circle-outline-thick-symbolic",
+                column=1,
+                row=0,
+                group=ToolConfig.SHAPES_GROUP,
+                shown_stack="fill",
+                has_scale=True,
+                has_primary_color=True,
+            ),
+            ToolConfig(
+                mode=DrawingMode.LINE,
+                icon="draw-line-symbolic",
+                column=2,
+                row=0,
+                group=ToolConfig.SHAPES_GROUP,
+                has_scale=True,
+                has_primary_color=True,
+            ),
+            ToolConfig(
+                mode=DrawingMode.ARROW,
+                icon="arrow1-top-right-symbolic",
+                column=3,
+                row=0,
+                group=ToolConfig.SHAPES_GROUP,
+                has_scale=True,
+                has_primary_color=True,
+            ),
+        ]
+
+
+class ToolGroupConfig:
+    def __init__(
+        self,
+        name: str,
+        label: str,
+        icon: str,
+        column: int,
+        row: int,
+        default_mode: DrawingMode,
+        shortcuts: List[str],
+    ) -> None:
+        self.name = name
+        self.label = label
+        self.icon = icon
+        self.column = column
+        self.row = row
+        self.default_mode = default_mode
+        self.shortcuts = shortcuts
+
+    @staticmethod
+    def get_all_groups() -> List["ToolGroupConfig"]:
+        return [
+            ToolGroupConfig(
+                name=ToolConfig.SHAPES_GROUP,
+                label=_("Shapes"),
+                icon="shapes-symbolic",
+                column=3,
+                row=1,
+                default_mode=DrawingMode.SQUARE,
+                shortcuts=["7", "KP_7"],
             ),
         ]

@@ -913,6 +913,10 @@ msgstr "Число"
 msgid "Eraser"
 msgstr "Гумка"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "Фігури"
+
 #: gradia/ui/dialog/delete_screenshots_dialog.py:33
 msgid "No screenshots to delete"
 msgstr "Немає знімків екрану для вилучення"

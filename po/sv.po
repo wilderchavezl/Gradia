@@ -889,6 +889,10 @@ msgstr "Tal"
 msgid "Eraser"
 msgstr "Suddgummi"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "Former"
+
 #: gradia/ui/dialog/delete_screenshots_dialog.py:33
 msgid "No screenshots to delete"
 msgstr "Inga skärmbilder att ta bort"

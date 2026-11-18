@@ -918,6 +918,10 @@ msgstr "Nummer"
 msgid "Eraser"
 msgstr "Gum"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "Vormen"
+
 #: gradia/ui/dialog/delete_screenshots_dialog.py:33
 msgid "No screenshots to delete"
 msgstr "Geen schermafbeeldingen om te verwijderen"

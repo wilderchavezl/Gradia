@@ -899,6 +899,10 @@ msgstr "Số"
 msgid "Eraser"
 msgstr "Tẩy"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "Hình dạng"
+
 #: gradia/ui/dialog/delete_screenshots_dialog.py:33
 msgid "No screenshots to delete"
 msgstr "Không có ảnh chụp màn hình nào để xóa"

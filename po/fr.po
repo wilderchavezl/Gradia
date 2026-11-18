@@ -923,6 +923,10 @@ msgstr "Numéro"
 msgid "Eraser"
 msgstr "Gomme"
 
+#: gradia/backend/tool_config.py:394
+msgid "Shapes"
+msgstr "Formes"
+
 #: gradia/ui/dialog/delete_screenshots_dialog.py:33
 msgid "No screenshots to delete"
 msgstr "Aucune capture d’écran à supprimer"

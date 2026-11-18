@@ -211,3 +211,7 @@ class ImageSidebar(Adw.Bin):
 
     def set_drawing_mode(self, mode):
         self.drawing_tools_group.set_current_tool(mode)
+
+    def set_drawing_group(self, group_name: str) -> None:
+        grid = self.drawing_tools_group.drawing_tools_grid
+        self.drawing_tools_group.set_current_tool(grid.get_group_mode(group_name))

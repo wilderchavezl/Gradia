@@ -43,7 +43,7 @@ from gradia.backend.settings import Settings
 from gradia.constants import rootdir, build_type # pyright: ignore
 from gradia.ui.dialog.delete_screenshots_dialog import DeleteScreenshotsDialog
 from gradia.ui.dialog.confirm_close_dialog import ConfirmCloseDialog
-from gradia.backend.tool_config import ToolOption
+from gradia.backend.tool_config import ToolOption, ToolGroupConfig
 from gradia.ui.dialog.ocr_launcher import present_ocr_dialog
 from gradia.ui.preferences.provider_selection_window import ProviderListPage
 
@@ -162,6 +162,14 @@ class GradiaMainWindow(Adw.ApplicationWindow):
                 f"set-drawing-mode-{mode.name.lower()}",
                 lambda *_, m=mode: self.sidebar.set_drawing_mode(m),
                 mode.shortcuts,
+                disable_on_entry_focus=True
+            )
+
+        for group in ToolGroupConfig.get_all_groups():
+            self.create_action(
+                f"set-drawing-group-{group.name}",
+                lambda *_, name=group.name: self.sidebar.set_drawing_group(name),
+                group.shortcuts,
                 disable_on_entry_focus=True
             )
 

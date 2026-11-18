@@ -38,6 +38,8 @@ class DrawingToolsGroup(Gtk.Box):
     outline_2 = Gtk.Template.Child()
     drawing_tools_grid = Gtk.Template.Child()
     font_dropdown = Gtk.Template.Child()
+    shapes_revealer = Gtk.Template.Child()
+    shapes_box = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -51,7 +53,37 @@ class DrawingToolsGroup(Gtk.Box):
         self.temp_editing_tool_option: Optional[ToolOption] = None
         self.temp_editing_tool_config: Optional[ToolConfig] = None
 
+        self._shape_buttons: dict[DrawingMode, Gtk.ToggleButton] = {}
+        self._create_shape_buttons()
+
         self.connect("realize", self._on_realize)
+
+    def _create_shape_buttons(self):
+        shape_configs = [tc for tc in ToolConfig.get_all_tools_positions() if tc.group == ToolConfig.SHAPES_GROUP]
+        first_button = None
+
+        for tool_config in sorted(shape_configs, key=lambda tc: tc.column):
+            button = Gtk.ToggleButton(
+                icon_name=tool_config.icon,
+                tooltip_text=tool_config.mode.label(),
+                height_request=40,
+                css_classes=["flat", "circular"]
+            )
+            button.get_first_child().set_pixel_size(18)
+
+            if first_button is None:
+                first_button = button
+            else:
+                button.set_group(first_button)
+
+            button.connect("toggled", self._on_shape_button_toggled, tool_config.mode)
+            self._shape_buttons[tool_config.mode] = button
+            self.shapes_box.append(button)
+
+    def _on_shape_button_toggled(self, button: Gtk.ToggleButton, mode: DrawingMode):
+        if self._updating_ui or not button.get_active():
+            return
+        self.set_current_tool(mode)
 
     def _on_realize(self, *args):
         self._scroll_controller = Gtk.EventControllerScroll.new(
@@ -92,6 +124,11 @@ class DrawingToolsGroup(Gtk.Box):
 
     def _update_ui_for_tool(self, tool_config: ToolConfig, tool_option: ToolOption):
         self._updating_ui = True
+
+        show_shapes = tool_config.group == ToolConfig.SHAPES_GROUP and not self.is_temp_editing
+        self.shapes_revealer.set_reveal_child(show_shapes)
+        if show_shapes:
+            self._shape_buttons[tool_config.mode].set_active(True)
 
         self.size_scale.set_sensitive(tool_config.has_scale)
         self.color_picker.set_sensitive(tool_config.has_primary_color)
